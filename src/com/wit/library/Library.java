@@ -46,10 +46,10 @@ public class Library {
 
     public void addBook(Book book) {
         if (books.containsKey(book.getId())) {
-            System.out.println("Book is already available");
+            System.out.println(GlobalEmojis.alien+" Book is already available");
         } else {
             books.put(book.getId(), book);
-            System.out.println(book.getName()+" added to library successfully");
+            System.out.println(GlobalEmojis.checkMark+ " "+book.getName()+" added to library successfully");
         }
     }
 
@@ -58,7 +58,7 @@ public class Library {
             Book removedBook = books.get(bookId);
             books.remove(bookId);
         } else {
-            System.out.println("Kitap bulunamadı.");
+            System.out.println(GlobalEmojis.alien+" Couldn't find");
         }
     }
 
@@ -75,7 +75,7 @@ public class Library {
 
             book.borrowBook(user);
         } else {
-            System.out.println("No such user or book found!");
+            System.out.println(GlobalEmojis.alien+" No such user or book found!");
         }
     }
 
@@ -87,9 +87,9 @@ public class Library {
                 borrowedBy.getBorrowedBooks().remove(book);
                 book.setBorrowedBy(null);
                 book.setBorrowed(false);
-                System.out.println("Book returned successfully");
+                System.out.println(GlobalEmojis.checkMark+" Book returned successfully");
             } else {
-                System.out.println("Book is not borrowed!・❥・");
+                System.out.println(GlobalEmojis.alien+" Book is not borrowed!");
             }
         } else {
             System.out.println(GlobalEmojis.alien+" No such book found!");
@@ -118,7 +118,7 @@ public class Library {
                         System.out.println("  - " + book.getName());
                     }
                 } else {
-                    System.out.println("No books borrowed by user");
+                    System.out.println(GlobalEmojis.alien+" No books borrowed by user");
                 }
             }
             System.out.println();
@@ -144,7 +144,7 @@ public class Library {
             }
         }
         if (!found) {
-            System.out.println("No such book found!");
+            System.out.println(GlobalEmojis.alien+" No such book found!");
         }
     }
 
