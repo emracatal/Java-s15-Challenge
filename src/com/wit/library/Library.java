@@ -51,19 +51,8 @@ public class Library {
             System.out.println(GlobalEmojis.alien + " Book is already available");
         } else {
             books.put(book.getId(), book);
-            System.out.println(GlobalEmojis.checkMark + " " + book.getName() + " added to library successfully");
         }
     }
-
-    public void removeBook(String bookId) {
-        if (books.containsKey(bookId)) {
-            Book removedBook = books.get(bookId);
-            books.remove(bookId);
-        } else {
-            System.out.println(GlobalEmojis.alien + " Couldn't find");
-        }
-    }
-
 
     public void addUser(Person person) {
         users.put(person.getPersonId(), person);
@@ -99,10 +88,6 @@ public class Library {
     }
 
 
-    public Book getBookById(String bookId) {
-        return books.get(bookId);
-    }
-
     public void listAllUsers() {
         for (Person person : users.values()) {
             System.out.println("User ID: " + person.getPersonId() + ", User name: " + person.getName());
@@ -119,7 +104,6 @@ public class Library {
             }
         }
     }
-
 
     public void addBook(String id, String name, String author, double price) {
         Book book = new Book(id, name, author, price);
@@ -162,4 +146,6 @@ public class Library {
                 ", librarian=" + librarian +
                 '}';
     }
+
+    //TODO check how to use hasHcode and equals here.. seems meaningfull for this class..
 }

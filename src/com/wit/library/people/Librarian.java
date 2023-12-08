@@ -1,5 +1,7 @@
 package com.wit.library.people;
 
+import java.util.Objects;
+
 public class Librarian extends Person {
     private String staffId;
     private String password;
@@ -32,5 +34,18 @@ public class Librarian extends Person {
                 "staffId='" + staffId + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Librarian librarian = (Librarian) o;
+        return Objects.equals(staffId, librarian.staffId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(staffId);
     }
 }
