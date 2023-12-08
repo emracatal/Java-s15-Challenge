@@ -128,7 +128,7 @@ public class Library {
     }
 
     public void searchByAuthor(Collection<Book> books, String authorName) {
-        List<Book> booksByAuthor = books.stream().filter(book -> book.getAuthor().contains(authorName)).collect(Collectors.toList());
+        List<Book> booksByAuthor = books.stream().filter(book -> book.getAuthor().toLowerCase().contains(authorName.toLowerCase())).collect(Collectors.toList());
         if (booksByAuthor.isEmpty()) {
             System.out.println(GlobalEmojis.alien+" No such author's book found!");
         } else {
