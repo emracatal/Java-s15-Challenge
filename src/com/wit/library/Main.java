@@ -45,13 +45,11 @@ public class Main {
         boolean isRunning = true;
         System.out.println("================== WELCOME TO LIBRARY ==================");
         while (isRunning) {
-            System.out.println("PLEASE SELECT AN OPTION: ");
-            System.out.println("1 - SEARCH BOOK/LIST ALL BOOKS"); //OK
-            System.out.println("2 - ADD NEW BOOK"); //OK
-            System.out.println("3 - LIST ALL USERS"); //OK
-            System.out.println("4 - BORROW BOOK"); //OK
-            System.out.println("5 - RETURN BOOK");
-            System.out.println("0 - EXIT");
+            System.out.println("               PLEASE SELECT AN OPTION: ");
+            System.out.println("1 - SEARCH BOOK/LIST ALL BOOKS           4 - ADD NEW BOOK"); //OK
+            System.out.println("2 - SEARCH BOOK BY AUTHOR                5 - BORROW BOOK"); //TODO:equalsignorecase usage
+            System.out.println("3 - LIST ALL USERS                       6 - RETURN BOOK"); //OK
+            System.out.println("               0 - EXIT");
 
             try {
                 int choice = scanner.nextInt();
@@ -68,6 +66,18 @@ public class Main {
                         System.out.println("=========================================");
                         break;
                     case 2:
+                        System.out.println("Enter author name: ");
+                        String authorName = scanner.nextLine();
+                        System.out.println("=========================================");
+                        library.searchByAuthor(library.getBooks().values(),authorName);
+                        System.out.println("=========================================");
+                        break;
+                    case 3:
+                        System.out.println("=========================================");
+                        library.listAllUsers();
+                        System.out.println("=========================================");
+                        break;
+                    case 4:
                         System.out.println("Enter books infos: ");
                         System.out.println("ID:");
                         String newBookId = scanner.nextLine();
@@ -81,12 +91,7 @@ public class Main {
                         library.addBook(newBookId, newBookName, newBookAuthor, newBookPrice);
                         System.out.println(GlobalEmojis.checkMark+"Book added");
                         break;
-                    case 3:
-                        System.out.println("=========================================");
-                        library.listAllUsers();
-                        System.out.println("=========================================");
-                        break;
-                    case 4:
+                    case 5:
                         System.out.println("Enter user ID to borrow:");
                         String userIdForBorrow = scanner.nextLine();
                         System.out.println("Enter book ID to borrow:");
@@ -95,7 +100,7 @@ public class Main {
                         library.borrowBook(borrowBookId, userIdForBorrow);
                         System.out.println("=========================================");
                         break;
-                    case 5:
+                    case 6:
                         System.out.println("Enter book ID to return:");
                         String returnBookId = scanner.nextLine();
                         library.returnBook(returnBookId);

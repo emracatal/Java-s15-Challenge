@@ -5,19 +5,21 @@ import com.wit.library.people.Librarian;
 import com.wit.library.people.Person;
 import com.wit.library.people.User;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Library {
     private Map<String, Book> books;
-    private Map<String, Person>users;
+    private Map<String, Person> users;
     private Librarian librarian;
 
     public Library(Librarian librarian) {
         this.books = new HashMap<>();
         this.users = new HashMap<>();
-        this.librarian=librarian;
+        this.librarian = librarian;
     }
 
     public Map<String, Book> getBooks() {
@@ -46,10 +48,10 @@ public class Library {
 
     public void addBook(Book book) {
         if (books.containsKey(book.getId())) {
-            System.out.println(GlobalEmojis.alien+" Book is already available");
+            System.out.println(GlobalEmojis.alien + " Book is already available");
         } else {
             books.put(book.getId(), book);
-            System.out.println(GlobalEmojis.checkMark+ " "+book.getName()+" added to library successfully");
+            System.out.println(GlobalEmojis.checkMark + " " + book.getName() + " added to library successfully");
         }
     }
 
@@ -58,7 +60,7 @@ public class Library {
             Book removedBook = books.get(bookId);
             books.remove(bookId);
         } else {
-            System.out.println(GlobalEmojis.alien+" Couldn't find");
+            System.out.println(GlobalEmojis.alien + " Couldn't find");
         }
     }
 
@@ -75,7 +77,7 @@ public class Library {
 
             book.borrowBook(user);
         } else {
-            System.out.println(GlobalEmojis.alien+" No such user or book found!");
+            System.out.println(GlobalEmojis.alien + " No such user or book found!");
         }
     }
 
@@ -87,20 +89,14 @@ public class Library {
                 borrowedBy.getBorrowedBooks().remove(book);
                 book.setBorrowedBy(null);
                 book.setBorrowed(false);
-                System.out.println(GlobalEmojis.checkMark+" Book returned successfully");
+                System.out.println(GlobalEmojis.checkMark + " Book returned successfully");
             } else {
-                System.out.println(GlobalEmojis.alien+" Book is not borrowed!");
+                System.out.println(GlobalEmojis.alien + " Book is not borrowed!");
             }
         } else {
-            System.out.println(GlobalEmojis.alien+" No such book found!");
+            System.out.println(GlobalEmojis.alien + " No such book found!");
         }
     }
-
-
-
-
-
-
 
 
     public Book getBookById(String bookId) {
@@ -118,10 +114,9 @@ public class Library {
                         System.out.println("  - " + book.getName());
                     }
                 } else {
-                    System.out.println(GlobalEmojis.alien+" No books borrowed by user");
+                    System.out.println(GlobalEmojis.alien + " No books borrowed by user");
                 }
             }
-            System.out.println();
         }
     }
 
@@ -138,16 +133,26 @@ public class Library {
                 if (book.isBorrowed()) {
                     System.out.println("ID: " + book.getId() + ", Book name: " + book.getName() + ", Author: " + book.getAuthor() + ", Borrowed by: " + book.getBorrowedBy().getName());
                 } else {
-                    System.out.println("ID: " + book.getId() + ", Book name: " + book.getName() + ", Author: " + book.getAuthor() +", Book is available");
+                    System.out.println("ID: " + book.getId() + ", Book name: " + book.getName() + ", Author: " + book.getAuthor() + ", Book is available");
                 }
                 found = true;
             }
         }
         if (!found) {
-            System.out.println(GlobalEmojis.alien+" No such book found!");
+            System.out.println(GlobalEmojis.alien + " No such book found!");
         }
     }
 
+    public void searchByAuthor(Collection<Book> books, String authorName) {
+        List<Book> booksByAuthor = books.stream().filter(book -> book.getAuthor().contains(authorName)).collect(Collectors.toList());
+        if (booksByAuthor.isEmpty()) {
+            System.out.println(GlobalEmojis.alien+" No such author's book found!");
+        } else {
+            for (Book book : booksByAuthor) {
+                System.out.println(" - " + book.getName());
+            }
+        }
+    }
 
     @Override
     public String toString() {
